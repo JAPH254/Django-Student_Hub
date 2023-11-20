@@ -32,3 +32,14 @@ def sign_in(request):
 def sign_out(request):
     logout(request)
     return redirect('sign_in')
+    
+
+# pages views
+def assignments(request):
+    return render(request, 'assignments.html')
+def library(request):
+    return render(request, 'library.html')
+def notifications(request):
+    return render(request, 'notifications.html')
+def profile(request):
+    return render(request, 'profile.html')

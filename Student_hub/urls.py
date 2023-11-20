@@ -18,12 +18,16 @@ from django.contrib import admin
 from django.urls import path, include
 from django.contrib.auth.views import LogoutView
 from membersAuth import views
-from .views import home
+from pages import views
+from .views import *
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', home, name='home'),
     path('api/', include('app.urls')),
     path('auth/', include('membersAuth.urls')),
+    path('pages/', include('pages.urls')),
     path('logout/', LogoutView.as_view(), name='logout'),
+
+
 ]

@@ -31,17 +31,17 @@ class LibraryBookViewSet(viewsets.ModelViewSet):
 
 # posting the students details
 
-def student(request):
-    if request.method == 'POST':
-        name = request.POST.get('name')
-        email = request.POST.get('email')
-        phone = request.POST.get('phone')
-        course = request.POST.get('course')
-        year = request.POST.get('year')
+# def student(request):
+#     if request.method == 'POST':
+#         name = request.POST.get('name')
+#         email = request.POST.get('email')
+#         phone = request.POST.get('phone')
+#         course = request.POST.get('course')
+#         year = request.POST.get('year')
 
-        student = Student(name=name, email=email, phone=phone, course=course, year=year)
-        student.save()
-        return redirect('student')
-    else:
-        return render(request, '')
+#         student = Student(name=name, email=email, phone=phone, course=course, year=year)
+#         student.save()
+#         return redirect('student')
+#     else:
+#         return render(request, '')
     
