@@ -5,7 +5,7 @@ class Student(models.Model):
     name = models.CharField(max_length=100, blank=False)
     email = models.EmailField(max_length=100, blank=False, unique=True)
     phone = models.CharField(max_length=100, blank=False)
-    course = models.CharField(max_length=100, blank=False)
+    course = models.ForeignKey('Course', on_delete=models.CASCADE)
     year = models.CharField(max_length=100, blank=False)
 
     def __str__(self):
@@ -23,6 +23,7 @@ class Course(models.Model):
 class Announcement(models.Model):
     title = models.CharField(max_length=255)
     content = models.TextField()
+    course = models.ManyToManyField(Course)
     date_posted = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
@@ -31,6 +32,7 @@ class Announcement(models.Model):
 class Assignment(models.Model):
     title = models.CharField(max_length=255)
     content = models.TextField()
+    course = models.ManyToManyField(Course)
     date_posted = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
@@ -38,9 +40,12 @@ class Assignment(models.Model):
 
 class LibraryBook(models.Model):
     title = models.CharField(max_length=255)
+    course = models.ManyToManyField(Course)
     author = models.CharField(max_length=100)
     ISBN = models.CharField(max_length=13, unique=True)
     available = models.BooleanField(default=True)
+
+
 
 
     def __str__(self):
