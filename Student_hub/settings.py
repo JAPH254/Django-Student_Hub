@@ -62,13 +62,18 @@ STATICFILES_DIRS = [
     # Add the paths to your static files directories here
     # For example:
     os.path.join(BASE_DIR, 'static/membersAuth'),
+    os.path.join(BASE_DIR, 'static/pages'),
+    os.path.join(BASE_DIR, 'static/app'),
 ]
 
 
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [os.path.join(BASE_DIR, 'membersAuth', 'templates/membersAuth')],
+        'DIRS': [os.path.join(BASE_DIR, 'membersAuth', 'templates/membersAuth')
+                    , os.path.join(BASE_DIR, 'pages', 'templates/pages')
+                    , os.path.join(BASE_DIR, 'app', 'templates/app')
+                 ],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [

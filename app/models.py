@@ -31,9 +31,11 @@ class Announcement(models.Model):
 
 class Assignment(models.Model):
     title = models.CharField(max_length=255)
-    content = models.TextField()
+    description = models.TextField()
     course = models.ManyToManyField(Course)
     date_posted = models.DateTimeField(auto_now_add=True)
+    file = models.FileField(upload_to='assignments')
+    grade = models.CharField(max_length=100, blank=True)
 
     def __str__(self):
         return self.title

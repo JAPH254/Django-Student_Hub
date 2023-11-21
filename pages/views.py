@@ -7,7 +7,10 @@ def library(request):
     # render the library page
     return render(request, 'library.html', {'books': books})
 def assignments(request):
-    return render(request, 'assignments.html')
+    # retrieve the assignments
+    assignments = Assignment.objects.all()
+    # render the assignments page
+    return render(request, 'assignments.html', {'assignments': assignments})
 def notifications(request):
     return render(request, 'notifications.html')
 def profile(request):

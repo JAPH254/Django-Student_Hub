@@ -5,8 +5,18 @@
     <div class="col-md-8 text-center">
       <div class="card">
         <div class="card-body">
-          <h2 class="card-title">Welcome {{ user }} to the Students Hub</h2>
-          <!-- Add content specific to the home page -->
+          <form action="" method="post">
+            <!-- passing the token/ -->
+            {% csrf_token %}
+            {% for book in books %}
+            {{book.title}}
+            {{book.author}}
+            {{book.course}}
+            {{book.ISBN}}
+            {{book.available}}
+            {% endfor %} 
+            
+          </form>
         </div>
       </div>
     </div>

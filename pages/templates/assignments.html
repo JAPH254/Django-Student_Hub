@@ -6,8 +6,18 @@
       <div class="card">
         <div class="card-body">
           <h2 class="card-title">assignments </h2>
-          <!-- Add content specific to the home page -->
-          
+          {%csrf_token%}
+
+          {% for assignment in assignments %}
+
+          {{assignment.title}}
+          {{assignment.course}}
+          {{assignment.date_posted}}
+          {{assignment.description}}
+          {{assignment.file}}
+          {{assignment.grade}}
+
+          {% endfor %}
         </div>
       </div>
     </div>
