@@ -1,0 +1,71 @@
+{% extends 'base.html' %} 
+{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    {% load static %}
+    <link
+      rel="stylesheet"
+      href="{% static 'membersAuth/css/bootstrap.min.css'%}"
+    />
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>about</title>
+  </head>
+  <body>
+    <section class="about_section layout_padding">
+      <div class="container">
+        <div class="heading_container heading_center">
+          <h2>About <span>Us</span></h2>
+          <p>
+            welcome to our Student Portal System blog, your go-to source for all
+            things related to our innovative platform designed to enhance the
+            academic journey of students.
+          </p>
+        </div>
+        <div class="row">
+          <div class="col-md-6">
+            <div class="img-box">
+              <img
+                src="{% static 'membersAuth/images/about-img.png'%}"
+                alt=""
+              />
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="detail-box">
+              <h3>The students Hub</h3>
+              <p>
+                Welcome to our Student Portal System blog, your go-to source for
+                all things related to our innovative platform designed to
+                enhance the academic journey of students. As passionate
+                advocates for education, we recognized the need for a
+                centralized hub that empowers students with the tools they need
+                to thrive in their academic pursuits. Our Student Portal System
+                is not just a virtual space; it's a dynamic ecosystem that
+                fosters collaboration, efficiency, and engagement.
+              </p>
+              <p>
+                At the heart of our platform is a user-friendly interface that
+                seamlessly integrates academic resources, communication
+                channels, and administrative tools. Whether you're accessing
+                course materials, submitting assignments, or connecting with
+                fellow students and instructors, our Student Portal System is
+                engineered to streamline your educational experience. We believe
+                in the power of technology to transform education, and our blog
+                is dedicated to keeping you informed about the latest updates,
+                tips, and success stories within our ever-evolving
+                student-centric ecosystem. Join us on this exciting journey as
+                we redefine the way students navigate their academic pathways
+                and embrace the future of learning with the Student Portal
+                System.
+              </p>
+              <a href=""> Read More </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </body>
+</html>
+{% endblock %}

@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+  <title>register</title>
+  <style>
+    body {
+      background-color: #6f54d3; /* Set a light background color */
+    }
+  
+    .custom-container {
+      max-width: 400px; /* Adjust the max-width as needed */
+      margin: auto;
+      padding: 20px;
+    }
+  </style>
+</head>
+<body>
+
+<div class="container mt-5 mx-auto custom-container">
+  <h2 class="text-center mb-4">Student Hub Registration</h2>
+  <form method="post" action="{% url 'register'%}">
+    <!-- pass the csrf token -->
+    {% csrf_token%}
+    <div class="form-group">
+      <label for="course">Full Name:</label>
+      <input type="text" name="name" class="form-control form-control-sm" id="course" placeholder="Enter course" required>
+    </div>
+    <div class="form-group">
+      <label for="email">Email:</label>
+      <input type="email" name="email" class="form-control form-control-sm" id="email" placeholder="Enter email" required>
+    </div>
+    <div class="form-group">
+      <label for="phone">Phone:</label>
+      <input type="tel" name="phone" class="form-control form-control-sm" id="phone" placeholder="Enter phone number" required>
+    </div>
+    
+    <div class="form-group">
+      <label for="username">Username:</label>
+      <input type="text" name="username" class="form-control form-control-sm" id="username" placeholder="Enter username" required>
+    </div>
+    <div class="form-group">
+      <label for="password">Password:</label>
+      <input type="password" name="password" class="form-control form-control-sm" id="password" placeholder="Enter password" required>
+    </div>
+    <button type="submit" class="btn btn-primary btn-sm">Register</button>
+  </form>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+
+</body>
+</html>
