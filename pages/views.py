@@ -1,12 +1,21 @@
 
 from django.shortcuts import render, redirect
 from app.models import *
+from .forms import *
+from app.filters import *
 # Create your views here.
-def library(request): 
-    # retrieve books in the library
-    books = LibraryBook.objects.all()
-    # render the library page
-    return render(request, 'library.html', {'books': books})
+def filterbytitle(request): 
+    book_list = LibraryBook.objects.all()
+    book_filter = BookFilterbytitle(request.GET, queryset=book_list)
+    return render(request, 'filterbytitle.html', {'filter': book_filter})
+def filterbyauthor(request): 
+    book_list = LibraryBook.objects.all()
+    book_filter = BookFilterbyauthor(request.GET, queryset=book_list)
+    return render(request, 'filterbyauthor.html', {'filter': book_filter})
+def filterbyISBN(request): 
+    book_list = LibraryBook.objects.all()
+    book_filter = BookFilterbyISBN(request.GET, queryset=book_list)
+    return render(request, 'filterbyISBN.html', {'filter': book_filter})
 def assignments(request):
     # retrieve the assignments
     assignments = Assignment.objects.all()
@@ -18,15 +27,11 @@ def profile(request):
     return render(request, 'profile.html')
 def about(request):
     return render(request, 'about.html')
+def library(request):
+    return render(request, 'library.html')
 
 from django.shortcuts import render, redirect
 from app.models import *
-# Create your views here.
-def library(request): 
-    # retrieve books in the library
-    books = LibraryBook.objects.all()
-    # render the library page
-    return render(request, 'library.html', {'books': books})
 def assignments(request):
     # retrieve the assignments
     assignments = Assignment.objects.all()
@@ -37,3 +42,13 @@ def notifications(request):
 def profile(request):
     return render(request, 'profile.html')
 
+
+def searchBar(request):
+    if request.method == 'GET':
+        query = request.GET.get('query')
+        if query:
+            book = LibraryBook.objects.filter(title__contains=query) 
+            return render(request, 'search.html', {'book':book})
+        else:
+            print("No information to show")
+            return render(request, 'search.html', {})

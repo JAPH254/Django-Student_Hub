@@ -1,17 +1,19 @@
 from django.db import models
 from django.contrib.auth.models import User
 # Create your models here.
-class Student(models.Model):
+class Account(models.Model):
+    user = models.OneToOneField(User, on_delete=models.CASCADE, null=True)
     name = models.CharField(max_length=100, blank=False)
     email = models.EmailField(max_length=100, blank=False, unique=True)
     phone = models.CharField(max_length=100, blank=True)
     course = models.ForeignKey('Course', on_delete=models.CASCADE ,null=True)
     year = models.CharField(max_length=100, blank=True)
+    profile_pic = models.ImageField(default='client1.jpg', upload_to='users/',null=True, blank=True)
     username = models.CharField(max_length=100, blank=False, unique=True)
     password = models.CharField(max_length=100, blank=False)
 
     def __str__(self):
-        return self.name
+        return self.user.username
 
 class Course(models.Model):
     name = models.CharField(max_length=100, blank=False)
@@ -54,3 +56,10 @@ class LibraryBook(models.Model):
 
     def __str__(self):
         return self.title
+    
+class Collection(models.Model):
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    books = models.ManyToManyField(LibraryBook, related_name='collections')
+
+    def __str__(self):
+        return f"{self.user.username}'s Collection"

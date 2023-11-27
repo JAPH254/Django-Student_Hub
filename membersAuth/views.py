@@ -1,28 +1,27 @@
 # accounts/views.py
 
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.forms import AuthenticationForm, UserCreationForm
 from django.contrib.auth import login, authenticate, logout
+from django.views.generic import ListView, DeleteView
 from django.contrib.auth.models import User
-# from .forms import *
+from django.contrib import messages
+from .forms import *
 from app.models import *
 
 def register(request):
-    if request.method == 'POST':
-        name = request.POST['name']
-        email = request.POST['email']
-        phone = request.POST['phone']
-        username = request.POST['username']
-        password = request.POST['password']
+    form = CreateUserForm
 
-    # creating the user
-        user = User.objects.create_user(username=username, password=password, email=email, first_name=name)
-        user.save()
+    if request.method == 'POST':
+        form = CreateUserForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('sign_in')
         
-        return redirect('sign_in')
-    else:
-        return render(request, 'register.html')
-    
+        else:
+            form = CreateUserForm()
+    return render(request, 'register.html', {'form': form})
+
 
 def sign_in(request):
     if request.method == 'POST':
@@ -43,12 +42,31 @@ def sign_out(request):
     return redirect('sign_in')
     
 
-# pages views
-def assignments(request):
-    return render(request, 'assignments.html')
-def library(request):
-    return render(request, 'library.html')
-def notifications(request):
-    return render(request, 'notifications.html')
-def profile(request):
-    return render(request, 'profile.html')
+# # updating the user information
+def update_profile(request):
+    if request.method == 'POST':
+        form = UserForm(request.POST, instance=request.user)
+        if form.is_valid():
+            form.save()
+            return redirect('profile')
+    else:
+        form = UserForm(instance=request.user)
+    return render(request, 'update_profile.html', {'form': form})
+
+def add_to_collection(request, book_id):
+    book = get_object_or_404(LibraryBook, pk=book_id)
+    user_collection, created = Collection.objects.get_or_create(user=request.user)
+    user_collection.books.add(book)
+    return redirect('bookscollected')  # Redirect to your book listing page
+
+class CollectionListView(ListView):
+    model = Collection
+    template_name = 'collection.html'
+
+    def get_queryset(self):
+        return Collection.objects.filter(user=self.request.user)
+
+class BookDeleteView(DeleteView):
+    model = LibraryBook
+    template_name = 'book_confirm_delete.html'
+    success_url = '/collection/'  # Redirect to your collection page

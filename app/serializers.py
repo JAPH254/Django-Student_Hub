@@ -5,7 +5,7 @@ from .models import *
 #student serializer
 class StudentSerializer(serializers.ModelSerializer):
     class Meta:
-        model = Student
+        model = Account
         fields = '__all__'
 
 #course serializer
