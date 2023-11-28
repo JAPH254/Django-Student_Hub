@@ -19,3 +19,13 @@ class UserForm(forms.ModelForm):
     class Meta:
         model = User
         fields = ['first_name', 'last_name', 'username', 'email']
+
+
+class AddToCartForm(forms.Form):
+    book_id = forms.IntegerField(widget=forms.HiddenInput())
+
+
+class SubscriberForm(forms.ModelForm):
+    class Meta:
+        model = registeredmails
+        fields = ['email']

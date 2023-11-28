@@ -40,6 +40,18 @@ def sign_in(request):
 def sign_out(request):
     logout(request)
     return redirect('sign_in')
+
+def managesubscribers(request):
+    # adding mails to the database
+    if request.method == 'POST':
+        form = SubscriberForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('home')  # Redirect to a success page or any other desired page
+    else:
+        form = SubscriberForm()
+
+    return render(request, 'base.html', {'form': form})
     
 
 # # updating the user information
@@ -53,20 +65,38 @@ def update_profile(request):
         form = UserForm(instance=request.user)
     return render(request, 'update_profile.html', {'form': form})
 
-def add_to_collection(request, book_id):
-    book = get_object_or_404(LibraryBook, pk=book_id)
-    user_collection, created = Collection.objects.get_or_create(user=request.user)
-    user_collection.books.add(book)
-    return redirect('bookscollected')  # Redirect to your book listing page
 
-class CollectionListView(ListView):
-    model = Collection
-    template_name = 'collection.html'
 
-    def get_queryset(self):
-        return Collection.objects.filter(user=self.request.user)
 
-class BookDeleteView(DeleteView):
-    model = LibraryBook
-    template_name = 'book_confirm_delete.html'
-    success_url = '/collection/'  # Redirect to your collection page
+def book_list(request):
+    books = LibraryBook.objects.all()
+    return render(request, 'filterbytitle.html', {'books': books})
+
+
+
+
+
+# def add_to_collection(request, book_id):
+#     book = LibraryBook.objects.get(id=book_id)
+
+#     # Retrieve or create the collection for the logged-in user
+#     collection, created = Collect.objects.get_or_create(user=request.user)
+
+#     # Add the book to the collection
+#     collection.books.add(book)
+
+#     return redirect('collection')
+
+
+def move_user(request, book_id):
+    # Retrieve the user from the "User" model
+    book_to_move = get_object_or_404(LibraryBook, id=book_id)
+
+    # Create a corresponding entry in the "SelectedUser" model
+    collect = Collect.objects.create(books=book_to_move)
+
+    # Optionally, you can delete the user from the "User" model if needed
+    # user_to_move.delete()
+    
+
+    return redirect('filterbytitle')  # Redirect to a page displaying the list of users

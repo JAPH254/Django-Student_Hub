@@ -1,4 +1,6 @@
-<!-- book_search.html -->
+{% extends 'base.html' %}
+
+{% block content %}
 
 <!DOCTYPE html>
 <html lang="en">
@@ -15,7 +17,7 @@
 <div class="container mt-5">
     <div class="row justify-content-center">
         <div class="col-md-8">
-            <h2 class="text-center mb-4">Book Search</h2>
+            <h2 class="text-center mb-4 text-white">Book Search</h2>
 
             <form method="get">
                 <div class="input-group mb-3" aria-placeholder="here">
@@ -38,10 +40,11 @@
                                     <th>Author</th>
                                     <th>ISBN</th>
                                     <th>Avialability</th>
-                                    <th>Action</th>
+                                    <th>Download</th>
                                     
                                 </tr>
                             </thead>
+                            
                             {%for book in filter.qs%}
                             <tbody>
                                 <tr>
@@ -49,6 +52,12 @@
                                     <td>{{ book.author }}</td>
                                     <td>{{ book.ISBN }}</td>
                                     <td>{{ book.available }}</td>
+                                    {% if book.available == True %}
+                                    <!-- if the book has a file, allow the user to download. Else RETURN a message -->
+                                    <td><p><a href="{{ book.file.url }}" download>{{ book.file.name }}</a></p></td>
+                                    {% else %}
+                                    <td><p>Currently unavailable</p></td>
+                                    {% endif %}
                                     <td>
                                         <!-- button to move the book to the collection -->
                                         <a href="" class="btn btn-primary">Collect</a>
@@ -72,3 +81,4 @@
 
 </body>
 </html>
+{% endblock %}

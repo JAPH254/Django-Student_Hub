@@ -1,0 +1,61 @@
+
+
+{% extends 'base.html' %}
+
+{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  {% load static %}
+  <link rel="stylesheet" href="{% static 'membersAuth/css/bootstrap.min.css'%}">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>home</title>
+</head>
+<body>
+  <section class="slider_section ">
+    <div>
+        <p class="text-white">
+            At the heart of our platform is a user-friendly interface that
+            seamlessly integrates academic resources, communication
+            channels, and administrative tools. Whether you're accessing
+            course materials, submitting assignments, or connecting with
+            fellow students and instructors, our Student Portal System is
+            engineered to streamline your educational experience. We believe
+            in the power of technology to transform education, and our blog
+            is dedicated to keeping you informed about the latest updates,
+            tips, and success stories within our ever-evolving
+            student-centric ecosystem. Join us on this exciting journey as
+            we redefine the way students navigate their academic pathways
+            and embrace the future of learning with the Student Portal
+            System.<br>
+            Watch The video to continue
+          </p>
+          <!-- click the button to go to homepage -->
+            <a href="{% url 'home' %}" class="btn btn-primary">Back to Home</a>
+
+    </div>
+    <div class="container mt-5">
+        <!-- Your existing content -->
+    
+        <!-- Video Section -->
+        <div class="row justify-content-center">
+            <div class="col-md-8">
+                <h2 class="text-center mb-4 text-white">Watch Our guide Video</h2>
+    
+                <div class="embed-responsive embed-responsive-16by9">
+                    <!-- Replace 'your-video.mp4' with the actual path or URL of your video file -->
+                    <video class="embed-responsive-item" controls autoplay>
+                        <source src="\static\membersAuth\images\laptop.mp4" type="video/mp4">
+                        Your browser does not support the video tag.
+                    </video>
+                </div>
+            </div>
+        </div>
+    
+  </section>
+  <!-- end slider section -->
+  </div>
+</body>
+</html>
+{% endblock %}

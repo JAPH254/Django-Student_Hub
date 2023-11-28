@@ -42,6 +42,11 @@ def notifications(request):
 def profile(request):
     return render(request, 'profile.html')
 
+def infopage(request):
+    return render(request, 'infopage.html')
+def collection(request):
+    return render(request, 'collection.html')
+
 
 def searchBar(request):
     if request.method == 'GET':

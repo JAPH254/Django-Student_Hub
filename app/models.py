@@ -50,6 +50,7 @@ class LibraryBook(models.Model):
     author = models.CharField(max_length=100)
     ISBN = models.CharField(max_length=13, unique=True)
     available = models.BooleanField(default=True)
+    file = models.FileField(upload_to='documents/',default='This cannot be downloaded')
 
 
 
@@ -57,9 +58,15 @@ class LibraryBook(models.Model):
     def __str__(self):
         return self.title
     
-class Collection(models.Model):
+class Collect(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
-    books = models.ManyToManyField(LibraryBook, related_name='collections')
+    books = models.ManyToManyField(LibraryBook, related_name='collection')
 
     def __str__(self):
         return f"{self.user.username}'s Collection"
+
+class registeredmails(models.Model):
+    email = models.EmailField(max_length=100, blank=False, unique=True)
+
+    def __str__(self):
+        return self.email

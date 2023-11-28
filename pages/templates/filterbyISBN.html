@@ -1,4 +1,6 @@
-<!-- book_search.html -->
+{% extends 'base.html' %}
+
+{% block content %}
 
 <!DOCTYPE html>
 <html lang="en">
@@ -15,7 +17,7 @@
 <div class="container mt-5">
     <div class="row justify-content-center">
         <div class="col-md-8">
-            <h2 class="text-center mb-4">Book Search</h2>
+            <h2 class="text-center mb-4 text-white">Book Search</h2>
 
             <form method="get">
                 <div class="input-group mb-3" aria-placeholder="here">
@@ -61,6 +63,7 @@
         
             <!-- back to library -->
             <a href="{% url 'library' %}">Back to Library</a>
+            <a href="{% url 'collection' %}">My Collection</a>
         </div>
     </div>
 </div>
@@ -72,3 +75,5 @@
 
 </body>
 </html>
+
+{% endblock %}

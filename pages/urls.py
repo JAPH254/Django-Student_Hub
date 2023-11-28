@@ -14,9 +14,11 @@ urlpatterns = [
     path('about/', about, name='about'),
     path('search/', searchBar, name='search'),
     path('update-profile/', update_profile, name='update_profile'),
-    path('add-to-collection/<int:book_id>/', add_to_collection, name='add_to_collection'),
-    path('collection/', CollectionListView.as_view(), name='collection'),
-    path('book/<int:pk>/delete/', BookDeleteView.as_view(), name='book_delete'),
-
+    path('infopage/', infopage, name='infopage'),
+    path('books/', book_list, name='book_list'),
+    # path('add_to_collection/<int:book_id>/', add_to_collection, name='add_to_collection'),
+    path('collection/', collection, name='collection'),
+    path('managesubscribers/', managesubscribers, name='managesubscribers'),
+     path('move_user/<int:book_id>/', move_user, name='move_user'),
 ]
 
