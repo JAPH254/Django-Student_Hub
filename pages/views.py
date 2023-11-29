@@ -24,7 +24,10 @@ def assignments(request):
 def notifications(request):
     return render(request, 'notifications.html')
 def profile(request):
-    return render(request, 'profile.html')
+    print(request.user.profile_picture)
+    print(request.user.phone_number)
+    return render(request, 'profile.html', {'user': request.user})
+
 def about(request):
     return render(request, 'about.html')
 def library(request):

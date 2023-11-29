@@ -19,6 +19,8 @@ urlpatterns = [
     # path('add_to_collection/<int:book_id>/', add_to_collection, name='add_to_collection'),
     path('collection/', collection, name='collection'),
     path('managesubscribers/', managesubscribers, name='managesubscribers'),
-     path('move_user/<int:book_id>/', move_user, name='move_user'),
+    path('move_user/<int:book_id>/', move_user, name='move_user'),
+    path('request_book/<int:book_id>/', request_book, name='request_book'),
+    path('chat/<str:username>/', chat, name='chat'),
 ]
 

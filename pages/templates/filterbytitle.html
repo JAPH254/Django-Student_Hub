@@ -6,7 +6,7 @@
     <title>Item List</title>
   </head>
   <body>
-    <h2>List of Users</h2>
+    <!-- <h2>List of Users</h2>
     <ul>
       {%for book in filter.qs%}
             <li>
@@ -14,8 +14,15 @@
                 <a href="{% url 'move_user' book.id %}">Move to SelectedUser</a>
             </li>
         {% endfor %}
-    </ul>
- 
+    </ul> -->
+
+    <h2>Request Book: {{ book.title }}</h2>
+
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Submit Request</button>
+    </form>
 </html>
 
 {% endblock %} ```

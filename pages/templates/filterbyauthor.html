@@ -14,9 +14,9 @@
 </head>
 <body class="bg-light">
 
-<div class="container mt-5">
+<div class="container mt-1">
     <div class="row justify-content-center">
-        <div class="col-md-8">
+        <div class="col-md-15">
             <h2 class="text-center mb-4 text-white">Book Search</h2>
 
             <form method="get">
@@ -30,10 +30,8 @@
                 <a href="{% url 'filterbyISBN' %}">Filter by ISBN</a>
             </form>
 
-            
-                <div class="card mb-3">
-                    <div class="card-body">
-                        <table>
+
+                        <table class="table-striped table-dark table-hover table-bordered" style="padding:20px ;">
                             <thead>
                                 <tr>
                                     <th>Title</th>
@@ -71,9 +69,7 @@
             <!-- back to library -->
             <a href="{% url 'library' %}">Back to Library</a>
         </div>
-    </div>
-</div>
-
+    
 <!-- Bootstrap JS and dependencies -->
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>

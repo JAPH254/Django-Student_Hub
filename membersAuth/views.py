@@ -1,27 +1,44 @@
 # accounts/views.py
 
 from django.shortcuts import render, redirect, get_object_or_404
+from django.conf import settings
+User = settings.AUTH_USER_MODEL
 from django.contrib.auth.forms import AuthenticationForm, UserCreationForm
 from django.contrib.auth import login, authenticate, logout
 from django.views.generic import ListView, DeleteView
-from django.contrib.auth.models import User
 from django.contrib import messages
 from .forms import *
 from app.models import *
+from django.contrib.auth import get_user_model
+# views.py
 
-def register(request):
-    form = CreateUserForm
 
+def update_profile(request):
     if request.method == 'POST':
-        form = CreateUserForm(request.POST)
+        form = UserUpdateForm(request.POST, request.FILES, instance=request.user)
         if form.is_valid():
             form.save()
-            return redirect('sign_in')
-        
-        else:
-            form = CreateUserForm()
-    return render(request, 'register.html', {'form': form})
+            # Redirect to the profile page after successful update
+            return redirect('profile')
+    else:
+        form = UserUpdateForm(instance=request.user)
 
+    return render(request, 'update_profile.html', {'form': form})
+
+
+
+
+def register_user(request):
+    if request.method == 'POST':
+        form = UserRegistrationForm(request.POST, request.FILES)
+        if form.is_valid():
+            user = form.save()
+            
+            return redirect('sign_in')  # Redirect to the user's profile or dashboard
+    else:
+        form = UserRegistrationForm()
+
+    return render(request, 'register.html', {'form': form})
 
 def sign_in(request):
     if request.method == 'POST':
@@ -54,16 +71,6 @@ def managesubscribers(request):
     return render(request, 'base.html', {'form': form})
     
 
-# # updating the user information
-def update_profile(request):
-    if request.method == 'POST':
-        form = UserForm(request.POST, instance=request.user)
-        if form.is_valid():
-            form.save()
-            return redirect('profile')
-    else:
-        form = UserForm(instance=request.user)
-    return render(request, 'update_profile.html', {'form': form})
 
 
 
@@ -100,3 +107,41 @@ def move_user(request, book_id):
     
 
     return redirect('filterbytitle')  # Redirect to a page displaying the list of users
+
+
+def request_book(request, book_id):
+    book = LibraryBook.objects.get(pk=book_id)  # Replace 'Book' with your actual Book model
+
+    if request.method == 'POST':
+        form = BookRequestForm(request.POST)
+        if form.is_valid():
+            message = form.cleaned_data['message']
+            user = request.user
+            BookRequest.objects.create(user=user, book=book, message=message)
+            return redirect('filterbytitle', book_id=book_id)  # Redirect to the book detail page
+    else:
+        form = BookRequestForm()
+
+    return render(request, 'filterbytitle.html', {'form': form, 'book': book})
+
+User = get_user_model()
+def chat(request, username):
+    receiver = User.objects.get(username=username)
+
+    if request.method == 'POST':
+        form = MessageForm(request.POST)
+        if form.is_valid():
+            message = form.save(commit=False)
+            message.sender = request.user
+            message.receiver = receiver
+            message.save()
+            return redirect('chat', username=username)
+    else:
+        form = MessageForm()
+
+    messages = Message.objects.filter(
+        (models.Q(sender=request.user) & models.Q(receiver=receiver)) |
+        (models.Q(sender=receiver) & models.Q(receiver=request.user))
+    ).order_by('timestamp')
+
+    return render(request, 'chat/chat.html', {'receiver': receiver, 'form': form, 'messages': messages})

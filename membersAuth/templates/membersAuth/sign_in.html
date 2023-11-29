@@ -11,20 +11,19 @@
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 
 </head>
-<body class="d-flex align-items-center justify-content-center vh-100">
+<body class="d-flex align-items-center justify-content-center vh-100" style="background-color:rgb(181, 212, 212);">
   {% block content %}
-  <div class="container">
+  <div class="container" style="backgrounlueviolet;">
     <div class="row justify-content-center">
-      <div class="col-md-6">
-        <div class="card">
+      <div class="col-md-6" style="background-color;">
+        <div class="card" style="background-color: rgb(201, 243, 215);">
           <div class="card-body">
             <h2 class="text-center mb-4">Login</h2>
             <form method="post">
               {% csrf_token %}
               {{ form.as_p }}
               <button type="submit" class="btn btn-primary btn-block">Sign In</button>
-              <!-- if the user does not have an account, register here -->
-              <p class="text-center mt-3">Dont have an account? <a href="{% url 'register' %}">Register</a></p>
+              if the user does not have an account? <a href="{% url 'register_user'%}">register here</a> 
             </form>
           </div>
         </div>

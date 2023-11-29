@@ -1,67 +1,105 @@
-{% extends 'base.html' %} {% block content %}
-<div class="container mt-5">
-  <div class="row justify-content-center">
-    <div class="col-md-6">
-      <div class="card">
-        <div class="card-body">
-          <h2 class="card-title text-center mb-4">User Registration</h2>
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'membersAuth/css/bootstrap.min.css' %}">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>register</title>
+    <style>
+      /* Apply a background image to the first div *
+
+      /* Style the second div with details */
+      .body {
+        background-color: rgb(181, 212, 212);
+      }
+      .container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        background-color: rgb(181, 212, 212);
+        width: 100%;
+        border-radius: 15px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      
+      <!-- <div class="img-box">
+        <img
+          src="{% static 'membersAuth/images/hme.jpg'%}"
+          alt="No Image"
+          style="border-radius: 25px;"
+          height="500px"
+          width="400px"
+        />
+      </div> -->
+      <div class="second-div">
+        <h2 class="text-primary">Students Hub Register</h2>
+        <form method="post">
+          {% csrf_token %}
           <div class="text-center">
-            <form method="post">
-              {% csrf_token %}
-              <div class="text-center">
-                <div class="form-group row">
-                  <label for="{{ form.first_name.id_for_label }}"
-                    >First Name</label
-                  >
-                  {{ form.first_name }}
-                </div>
+            <strong>
+              <label for="{{ form.first_name.id_for_label }}">First Name</label
+            ><br />
+            {{ form.first_name }}
 
-                <div class="form-group row">
-                  <label for="{{ form.last_name.id_for_label }}"
-                    >Last Name</label
-                  >
-                  {{ form.last_name }}
-                </div>
+            </strong>
+            <br />
+            <strong>
+              <label for="{{ form.last_name.id_for_label }}">Last Name</label
+            ><br />
+            {{ form.last_name }}
+            <br />
 
-                <div class="form-group row">
-                  <label for="{{ form.username.id_for_label }}">Username</label>
-                  {{ form.username }}
-                </div>
+            </strong>
 
-                <div class="form-group row">
-                  <label for="{{ form.email.id_for_label }}">Email</label>
-                  {{ form.email }}
-                </div>
+            <strong>
+              <label for="{{ form.username.id_for_label }}">Username</label><br />
+            {{ form.username }}
 
-                <div class="form-group row">
-                  <label for="{{ form.password1.id_for_label }}"
-                    >Password</label
-                  >
-                  {{ form.password1 }}
-                </div>
+            </strong>
+            
+            <br />
+            <strong>
+              <label for="{{ form.email.id_for_label }}">Email</label> <br />
+            {{ form.email }}
 
-                <div class="form-group row">
-                  <label for="{{ form.password2.id_for_label }}"
-                    >Confirm Password</label
-                  >
-                  {{ form.password2 }}
-                </div>
+            </strong>
 
-                <button type="submit" class="btn btn-primary btn-block">
-                  Register
-                </button>
+            
+            <br />
+            <strong>
+              <label for="{{ form.password1.id_for_label }}">Password</label
+            ><br />
+            {{ form.password1 }}
+            </strong>
+            
+            <br />
+            <strong>
+              
+            <label for="{{ form.password2.id_for_label }}"
+              >Confirm Password</label
+            ><br />
+            {{ form.password2 }}
+            <br />
 
-                <!-- if the user has an account, login here -->
-                <p class="text-center mt-3">
-                  Already have an account?
-                  <a href="{% url 'sign_in' %}">Login</a>
-                </p>
-              </div>
-            </form>
+            </strong>
+<br>
+            <button type="submit" class="btn btn-primary btn-block" style="pa">
+              Register
+            </button>
+
+            <!-- if the user has an account, login here -->
+            <p class="text-center mt-3">
+              Already have an account?
+              <a href="{% url 'sign_in' %}">Login</a>
+            </p>
           </div>
-        </div>
+        </form>
       </div>
     </div>
-  </div>
-</div>
-{% endblock %}
+  </body>
+</html>

@@ -4,9 +4,9 @@ from .models import *
 from .serializers import *
 
 # Create your views here.
-class StudentViewSet(viewsets.ModelViewSet):
-    queryset = Account.objects.all()
-    serializer_class = StudentSerializer
+# class StudentViewSet(viewsets.ModelViewSet):
+#     queryset = Account.objects.all()
+#     serializer_class = StudentSerializer
 
     #course
 class CourseViewSet(viewsets.ModelViewSet):

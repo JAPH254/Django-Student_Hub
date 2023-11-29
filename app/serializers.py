@@ -3,10 +3,10 @@ from rest_framework import serializers
 from .models import *
 
 #student serializer
-class StudentSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = Account
-        fields = '__all__'
+# class StudentSerializer(serializers.ModelSerializer):
+#     class Meta:
+#         model = Account
+#         fields = '__all__'
 
 #course serializer
 

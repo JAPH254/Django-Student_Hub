@@ -5,30 +5,30 @@
 
 <body>
     <!-- Main Content -->
-    <div class="container mt-5">
-        <div class="row">
-            <div class="col-md-4">
-                <!-- Profile Picture -->
-                <img src="{{user.profile_pic}}" alt="no image" class="profile-picture">
-            </div>
+    <div class="container" style="display: flex; justify-content: space-evenly; align-items: center;"> 
+        
+          <div class="col-md-4">
+            <!-- Profile Picture -->
+            <img src="{{ user.profile_picture.url }}" alt="no image" class="img-fluid " style="border-radius:25%; width: 80%; height: auto;">
+            
+        </div>
+        
             <div class="col-md-8" >
-                <h1 class="text-white">My Profile </h1>
-                <p class="lead, text-white">software engineer</p>
+                <h1 class="text-white navbar-brand" ><span>My Profile </span></h1>
+                <p class="text-info">software engineer</p>
                 <p class="text-info">Username: {{user.username}}</p>
                 <p class="text-info">First Name:{{user.first_name}}</p>
                 <p class="text-info">Last Name: {{user.last_name}}</p>
                 <p class="text-info">Email: <a href="mailto:{{user.email}}">{{user.email}}</a></p>
                 <!-- sample bio -->
                 <h3 class="text-info">Bio</h3>
-                <p class="text-white">I am a software engineer, passionate about learning new technologies</p>
+                <p class="text-info">I am a software engineer, passionate about learning new technologies</p>
                 <div class="col-md-8">
                   <a href="{% url 'update_profile' %}" class="btn btn-primary">Update Profile</a>
               </div>
-            </div>
+            
             
         </div>
-
-        <!-- Add more sections as needed, such as education, experience, skills, etc. -->
 
     </div>
 

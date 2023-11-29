@@ -1,4 +1,15 @@
-{% extends 'base.html' %} {% block content %}
+{% extends 'base.html' %}
+ {% block content %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  {% load static %}
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  
 
 <section class="about_section layout_padding">
   <div class="container">
@@ -41,13 +52,15 @@
           <a href="{% url 'filterbytitle' %}" class="btn1">
             <span>Access Library</span>
           </a>
-
-        <div class="img-box">
-          <img src="" alt="No Image" />
-        </div>
+<br><br><br>
+        
+          <img src="{% static 'membersAuth/images/resource.jpg'%}" alt="No Image" style="height: 450px; border-radius: 25px;"/>
+       
       </div>
     </div>
   </div>
 </section>
+</body>
+</html>
 
 {%endblock %}

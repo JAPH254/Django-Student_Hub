@@ -49,7 +49,7 @@
     <header class="header_section">
       <div class="container-fluid">
         <nav class="navbar navbar-expand-lg custom_nav-container ">
-          <a class="navbar-brand" href="index.html">
+          <a class="navbar-brand" href="{% url 'home'%}">
             <span>
               Students Hub
             </span>
@@ -81,9 +81,9 @@
                 <a class="nav-link" href="{% url 'logout'%}"> <i class="fa fa-user" aria-hidden="true"></i> Logout</a>
               </li> -->
               <li class="nav-item">
-                 {% if user.is_authenticated %}
-              <a href="{% url 'logout'%}"> welcome <br> {{user.username}}</a>
-              {% endif %}
+                <a href="{% url 'profile'%}"><img src="{{ user.profile_picture.url }}" alt="no image" class="img-fluid rounded-circle profile-picture" style="max-width: 45px; height: auto;"><br></a>
+              <a href="{% url 'logout'%}"> Logout <br> {{user.username}}</a>
+            
               </li>
              
             </ul>

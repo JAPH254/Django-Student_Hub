@@ -1,19 +1,25 @@
 from django.db import models
-from django.contrib.auth.models import User
-# Create your models here.
-class Account(models.Model):
-    user = models.OneToOneField(User, on_delete=models.CASCADE, null=True)
-    name = models.CharField(max_length=100, blank=False)
-    email = models.EmailField(max_length=100, blank=False, unique=True)
-    phone = models.CharField(max_length=100, blank=True)
-    course = models.ForeignKey('Course', on_delete=models.CASCADE ,null=True)
-    year = models.CharField(max_length=100, blank=True)
-    profile_pic = models.ImageField(default='client1.jpg', upload_to='users/',null=True, blank=True)
-    username = models.CharField(max_length=100, blank=False, unique=True)
-    password = models.CharField(max_length=100, blank=False)
+from django.conf import settings
+from django.contrib.auth.models import AbstractUser
+
+
+class CustomUser(AbstractUser):
+    profile_picture = models.ImageField(upload_to='images/', null=True, blank=True)
+    phone_number = models.CharField(max_length=15, null=True, blank=True)
+    
 
     def __str__(self):
-        return self.user.username
+        return self.username
+    
+
+class BookRequest(models.Model):
+    user = models.ForeignKey(CustomUser, on_delete=models.CASCADE)
+    book = models.ForeignKey('LibraryBook', on_delete=models.CASCADE) 
+    message = models.TextField()
+    timestamp = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return f"{self.user.username} - {self.book.title} Request"
 
 class Course(models.Model):
     name = models.CharField(max_length=100, blank=False)
@@ -23,6 +29,13 @@ class Course(models.Model):
 
     def __str__(self):
         return self.name
+
+
+class Message(models.Model):
+    sender = models.ForeignKey(CustomUser, related_name='sent_messages', on_delete=models.CASCADE)
+    receiver = models.ForeignKey(CustomUser, related_name='received_messages', on_delete=models.CASCADE)
+    content = models.TextField()
+    timestamp = models.DateTimeField(auto_now_add=True)
 
 class Announcement(models.Model):
     title = models.CharField(max_length=255)
@@ -59,7 +72,7 @@ class LibraryBook(models.Model):
         return self.title
     
 class Collect(models.Model):
-    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    user = models.OneToOneField(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     books = models.ManyToManyField(LibraryBook, related_name='collection')
 
     def __str__(self):
