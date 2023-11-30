@@ -77,12 +77,10 @@
               <li class="nav-item">
                 <a class="nav-link" href="{% url 'profile'%}">profile</a>
               </li>
-              <!-- <li class="nav-item">
-                <a class="nav-link" href="{% url 'logout'%}"> <i class="fa fa-user" aria-hidden="true"></i> Logout</a>
-              </li> -->
+           
               <li class="nav-item">
                 <a href="{% url 'profile'%}"><img src="{{ user.profile_picture.url }}" alt="no image" class="img-fluid rounded-circle profile-picture" style="max-width: 45px; height: auto;"><br></a>
-              <a href="{% url 'logout'%}"> Logout <br> {{user.username}}</a>
+              <a href="{% url 'sign_out'%}"> Logout <br> {{user.username}}</a>
             
               </li>
              
@@ -172,14 +170,8 @@
               <a class="" href="{% url 'about'%}">
                 About
               </a>
-              <a class="" href="service.html">
-                Services
-              </a>
-              <a class="" href="why.html">
-                Why Us
-              </a>
-              <a class="" href="team.html">
-                Team
+              <a class="" href="{% url 'infopage'%}">
+                Info page
               </a>
             </div>
           </div>

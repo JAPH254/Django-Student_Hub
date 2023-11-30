@@ -10,9 +10,10 @@ from django.contrib import messages
 from .forms import *
 from app.models import *
 from django.contrib.auth import get_user_model
+from django.contrib.auth.decorators import login_required
 # views.py
 
-
+@login_required
 def update_profile(request):
     if request.method == 'POST':
         form = UserUpdateForm(request.POST, request.FILES, instance=request.user)
@@ -54,10 +55,12 @@ def sign_in(request):
         form = AuthenticationForm()
     return render(request, 'sign_in.html', {'form': form})
 
+@login_required
 def sign_out(request):
     logout(request)
     return redirect('sign_in')
 
+@login_required
 def managesubscribers(request):
     # adding mails to the database
     if request.method == 'POST':
@@ -74,7 +77,7 @@ def managesubscribers(request):
 
 
 
-
+@login_required
 def book_list(request):
     books = LibraryBook.objects.all()
     return render(request, 'filterbytitle.html', {'books': books})
@@ -94,7 +97,7 @@ def book_list(request):
 
 #     return redirect('collection')
 
-
+@login_required
 def move_user(request, book_id):
     # Retrieve the user from the "User" model
     book_to_move = get_object_or_404(LibraryBook, id=book_id)
@@ -108,7 +111,7 @@ def move_user(request, book_id):
 
     return redirect('filterbytitle')  # Redirect to a page displaying the list of users
 
-
+@login_required
 def request_book(request, book_id):
     book = LibraryBook.objects.get(pk=book_id)  # Replace 'Book' with your actual Book model
 
@@ -123,25 +126,24 @@ def request_book(request, book_id):
         form = BookRequestForm()
 
     return render(request, 'filterbytitle.html', {'form': form, 'book': book})
-
-User = get_user_model()
-def chat(request, username):
-    receiver = User.objects.get(username=username)
-
+@login_required
+def chat(request, receiver_id=None):
     if request.method == 'POST':
         form = MessageForm(request.POST)
         if form.is_valid():
             message = form.save(commit=False)
             message.sender = request.user
-            message.receiver = receiver
             message.save()
-            return redirect('chat', username=username)
+            return redirect('chat', receiver_id=receiver_id)
     else:
         form = MessageForm()
 
-    messages = Message.objects.filter(
-        (models.Q(sender=request.user) & models.Q(receiver=receiver)) |
-        (models.Q(sender=receiver) & models.Q(receiver=request.user))
-    ).order_by('timestamp')
-
-    return render(request, 'chat/chat.html', {'receiver': receiver, 'form': form, 'messages': messages})
+    if receiver_id:
+        receiver = get_object_or_404(User, id=receiver_id)
+        messages = Message.objects.filter(
+            (models.Q(sender=request.user) & models.Q(receiver=receiver)) |
+            (models.Q(sender=receiver) & models.Q(receiver=request.user))
+        ).order_by('timestamp')
+        return render(request, 'inbox.html', {'form': form, 'messages': messages, 'user': request.user})
+    else:
+        return render(request, 'inbox.html', {'form': form, 'messages': [], 'user': request.user})

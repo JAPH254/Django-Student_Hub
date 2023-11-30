@@ -1,0 +1,26 @@
+<!-- inbox.html in your app's templates folder -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Conversation</title>
+</head>
+<body>
+    <h1>Conversation</h1>
+    <div>
+        {% for message in messages %}
+            {% if message.sender == user %}
+                <p style="color: blue;">{{ message.content }}</p>
+            {% else %}
+                <p style="color: green;">{{ message.content }}</p>
+            {% endif %}
+        {% endfor %}
+    </div>
+    <form method="post" action="{% url 'send_message' receiver_id %}">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Send</button>
+    </form>
+</body>
+</html>

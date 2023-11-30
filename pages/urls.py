@@ -21,6 +21,7 @@ urlpatterns = [
     path('managesubscribers/', managesubscribers, name='managesubscribers'),
     path('move_user/<int:book_id>/', move_user, name='move_user'),
     path('request_book/<int:book_id>/', request_book, name='request_book'),
-    path('chat/<str:username>/', chat, name='chat'),
+    path('chat/', chat, name='chat'),
+     path('chat/<int:receiver_id>/', chat, name='chat_with_receiver'),
 ]
 

@@ -29,7 +29,7 @@ urlpatterns = [
     path('api/', include('app.urls')),
     path('auth/', include('membersAuth.urls')),
     path('pages/', include('pages.urls')),
-    path('logout/', LogoutView.as_view(), name='logout'),
+    
 
 
 ]

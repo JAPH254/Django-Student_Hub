@@ -1,28 +1,80 @@
-{% extends 'base.html' %} {% block content %}
+{% extends 'base.html' %}
+
+{% block content %}
 
 <!DOCTYPE html>
-<html>
-  <head>
-    <title>Item List</title>
-  </head>
-  <body>
-    <!-- <h2>List of Users</h2>
-    <ul>
-      {%for book in filter.qs%}
-            <li>
-                {{ user.username }}
-                <a href="{% url 'move_user' book.id %}">Move to SelectedUser</a>
-            </li>
-        {% endfor %}
-    </ul> -->
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Book Search</title>
 
-    <h2>Request Book: {{ book.title }}</h2>
+    <!-- Bootstrap CSS -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body class="bg-light">
 
-    <form method="post">
-        {% csrf_token %}
-        {{ form.as_p }}
-        <button type="submit">Submit Request</button>
-    </form>
+<div class="container mt-1">
+    <div class="row justify-content-center">
+        <div class="col-md-15">
+            <h2 class="text-center mb-4 text-white">Book Search</h2>
+            <span class="text-primary">simply search your book by the title</span><br>
+            <form method="get">
+                <div class="input-group mb-3" aria-placeholder="here">
+                    {{ filter.form.title}}
+                    <div class="input-group-append">
+                        <button class="btn btn-primary" type="submit">Search</button>
+                    </div>
+                </div>
+                <!-- link to filter by author -->
+                <a href="{% url 'filterbyauthor' %}">Filter by Author</a>
+            </form>
+
+
+                        <table class="table-striped table-dark table-hover table-bordered" style="padding:20px ;">
+                            <thead>
+                                <tr>
+                                    <th>Title</th>
+                                    <th>Author</th>
+                                    <th>ISBN</th>
+                                    <th>Avialability</th>
+                                    <th>Download</th>
+                                    
+                                </tr>
+                            </thead>
+                            
+                            {%for book in filter.qs%}
+                            <tbody>
+                                <tr>
+                                    <td>{{ book.title }}</td>
+                                    <td>{{ book.author }}</td>
+                                    <td>{{ book.ISBN }}</td>
+                                    <td>{{ book.available }}</td>
+                                    {% if book.available == True %}
+                                    <!-- if the book has a file, allow the user to download. Else RETURN a message -->
+                                    <td><p><a href="{{ book.file.url }}" download>{{ book.file.name }}</a></p></td>
+                                    {% else %}
+                                    <td><p>Currently unavailable</p></td>
+                                    {% endif %}
+                                    <td>
+                                        <!-- button to move the book to the collection -->
+                                        <a href="" class="btn btn-primary">Collect</a>
+                                    </td>
+                                </tr>
+                            </tbody>
+                            {%endfor%}
+                        </table>
+                </div>
+        
+            <!-- back to library -->
+            <a href="{% url 'library' %}">Back to Library</a>
+        </div>
+    
+<!-- Bootstrap JS and dependencies -->
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+
+</body>
 </html>
-
-{% endblock %} ```
+{% endblock %}

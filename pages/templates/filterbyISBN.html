@@ -14,11 +14,11 @@
 </head>
 <body class="bg-light">
 
-<div class="container mt-5">
+<div class="container mt-1">
     <div class="row justify-content-center">
-        <div class="col-md-8">
+        <div class="col-md-15">
             <h2 class="text-center mb-4 text-white">Book Search</h2>
-
+            <span class="text-primary">simply search your book by the ISBN</span><br>
             <form method="get">
                 <div class="input-group mb-3" aria-placeholder="here">
                     {{ filter.form.ISBN}}
@@ -27,23 +27,22 @@
                     </div>
                 </div>
                 <!-- link to filter by author -->
-                <a href="{% url 'filterbytitle' %}">Filter by Title</a>
+                <a href="{% url 'filterbyauthor' %}">Filter by Author</a>
             </form>
 
-            
-                <div class="card mb-3">
-                    <div class="card-body">
-                        <table>
-                            <thead>
-                                <tr>
+
+                        <table class="table-striped table-dark table-hover table-bordered">
+                            <thead >
+                                <tr >
                                     <th>Title</th>
                                     <th>Author</th>
                                     <th>ISBN</th>
                                     <th>Avialability</th>
-                                    <th>Action</th>
+                                    <th>Download</th>
                                     
                                 </tr>
                             </thead>
+                            
                             {%for book in filter.qs%}
                             <tbody>
                                 <tr>
@@ -51,6 +50,12 @@
                                     <td>{{ book.author }}</td>
                                     <td>{{ book.ISBN }}</td>
                                     <td>{{ book.available }}</td>
+                                    {% if book.available == True %}
+                                    <!-- if the book has a file, allow the user to download. Else RETURN a message -->
+                                    <td><p><a href="{{ book.file.url }}" download>{{ book.file.name }}</a></p></td>
+                                    {% else %}
+                                    <td><p>Currently unavailable</p></td>
+                                    {% endif %}
                                     <td>
                                         <!-- button to move the book to the collection -->
                                         <a href="" class="btn btn-primary">Collect</a>
@@ -63,11 +68,8 @@
         
             <!-- back to library -->
             <a href="{% url 'library' %}">Back to Library</a>
-            <a href="{% url 'collection' %}">My Collection</a>
         </div>
-    </div>
-</div>
-
+    
 <!-- Bootstrap JS and dependencies -->
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
@@ -75,5 +77,4 @@
 
 </body>
 </html>
-
 {% endblock %}

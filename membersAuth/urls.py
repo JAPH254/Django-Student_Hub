@@ -6,7 +6,7 @@ from .views import *
 urlpatterns = [
     path('register/', register_user, name='register_user'),
     path('sign-in/', sign_in, name='sign_in'),
-    path('sign-out/', sign_out, name='sign_out'),
+    path('sign-out/', login_required(sign_out), name='sign_out'),
 ]
 
 if settings.DEBUG:
