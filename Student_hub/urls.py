@@ -29,9 +29,6 @@ urlpatterns = [
     path('api/', include('app.urls')),
     path('auth/', include('membersAuth.urls')),
     path('pages/', include('pages.urls')),
-    
-
-
 ]
 
 

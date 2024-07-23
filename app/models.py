@@ -1,42 +1,38 @@
 from django.db import models
 from django.conf import settings
-from django.contrib.auth.models import AbstractUser
+from membersAuth.models import CustomUser
 
-
-class CustomUser(AbstractUser):
-    profile_picture = models.ImageField(upload_to='images/', null=True, blank=True)
-    phone_number = models.CharField(max_length=15, null=True, blank=True)
-    
-
-    def __str__(self):
-        return self.username
-    
-
+# Book request model linking users to library books
 class BookRequest(models.Model):
     user = models.ForeignKey(CustomUser, on_delete=models.CASCADE)
-    book = models.ForeignKey('LibraryBook', on_delete=models.CASCADE) 
+    book = models.ForeignKey('LibraryBook', on_delete=models.CASCADE)
     message = models.TextField()
     timestamp = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
         return f"{self.user.username} - {self.book.title} Request"
 
+# Course model
 class Course(models.Model):
-    name = models.CharField(max_length=100, blank=False)
-    description = models.CharField(max_length=100, blank=False)
-    code = models.CharField(max_length=100, blank=False, unique=True)
-    duration = models.CharField(max_length=100, blank=False)
+    name = models.CharField(max_length=100)
+    description = models.CharField(max_length=100)
+    code = models.CharField(max_length=100, unique=True)
+    duration = models.CharField(max_length=100)
 
     def __str__(self):
         return self.name
 
-
+# Message model for sending messages between users
 class Message(models.Model):
     sender = models.ForeignKey(CustomUser, related_name='sent_messages', on_delete=models.CASCADE)
     receiver = models.ForeignKey(CustomUser, related_name='received_messages', on_delete=models.CASCADE)
     content = models.TextField()
     timestamp = models.DateTimeField(auto_now_add=True)
 
+    def __str__(self):
+        return f"From {self.sender.username} to {self.receiver.username}"
+
+# Announcement model linked to courses
 class Announcement(models.Model):
     title = models.CharField(max_length=255)
     content = models.TextField()
@@ -46,9 +42,10 @@ class Announcement(models.Model):
     def __str__(self):
         return self.title
 
+# Assignment model linked to courses with file upload
 class Assignment(models.Model):
     title = models.CharField(max_length=255)
-    description = models.TextField( blank=True, default='write your description here...')
+    description = models.TextField(blank=True, default='write your description here...')
     course = models.ManyToManyField(Course)
     date_posted = models.DateTimeField(auto_now_add=True)
     file = models.FileField(upload_to='assignments')
@@ -57,29 +54,29 @@ class Assignment(models.Model):
     def __str__(self):
         return self.title
 
+# Library book model linked to courses
 class LibraryBook(models.Model):
     title = models.CharField(max_length=255)
     course = models.ManyToManyField(Course)
     author = models.CharField(max_length=100)
     ISBN = models.CharField(max_length=13, unique=True)
     available = models.BooleanField(default=True)
-    file = models.FileField(upload_to='documents/',default='This cannot be downloaded')
-
-
-
+    file = models.FileField(upload_to='documents/', default='This cannot be downloaded')
 
     def __str__(self):
         return self.title
-    
+
+# User's book collection model
 class Collect(models.Model):
     user = models.OneToOneField(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
-    books = models.ManyToManyField(LibraryBook, related_name='collection')
+    books = models.ManyToManyField(LibraryBook, related_name='collections')
 
     def __str__(self):
         return f"{self.user.username}'s Collection"
 
-class registeredmails(models.Model):
-    email = models.EmailField(max_length=100, blank=False, unique=True)
+# Registered emails model
+class Registeredmails(models.Model):
+    email = models.EmailField(max_length=100, unique=True)
 
     def __str__(self):
         return self.email

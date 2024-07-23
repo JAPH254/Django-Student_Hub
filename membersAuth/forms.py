@@ -16,7 +16,7 @@ class AddToCartForm(forms.Form):
 
 class SubscriberForm(forms.ModelForm):
     class Meta:
-        model = registeredmails
+        model = Registeredmails
         fields = ['email']
 
 

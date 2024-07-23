@@ -6,4 +6,4 @@ from app.models import *
 
 # # Register the user here
 
-admin.site.register(registeredmails)
+admin.site.register(Registeredmails)
