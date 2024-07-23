@@ -1,43 +1,43 @@
-{% extends 'base.html' %} 
+{% extends 'base.html' %}
 {% block content %}
 
-<hr>
-
 <body>
-    <!-- Main Content -->
-    <div class="container" style="display: flex; justify-content: space-evenly; align-items: center;"> 
-        
-          <div class="col-md-4">
-            <!-- Profile Picture -->
-            <img src="{{ user.profile_picture.url }}" alt="no image" class="img-fluid " style="border-radius:25%; width: 80%; height: auto;">
-            
-        </div>
-        
-            <div class="col-md-8" >
-                <h1 class="text-white navbar-brand" ><span>My Profile </span></h1>
-                <p class="text-info">software engineer</p>
-                <p class="text-info">Username: {{user.username}}</p>
-                <p class="text-info">First Name:{{user.first_name}}</p>
-                <p class="text-info">Last Name: {{user.last_name}}</p>
-                <p class="text-info">Email: <a href="mailto:{{user.email}}">{{user.email}}</a></p>
-                <!-- sample bio -->
+  <div class="container mt-4">
+    <div class="row justify-content-center">
+      <div class="col-md-8">
+        <div class="card ">
+          <div class="row no-gutters">
+            <div class="col-md-4 text-center">
+              <!-- Profile Picture -->
+              <img src="{{ user.profile_picture.url }}" alt="Profile Picture" class="img-fluid rounded-circle m-4" style="width: 80%; height: auto;">
+            </div>
+            <div class="col-md-8">
+              <div class="card-body">
+                <h1 class="navbar-brand"><span>My Profile</span></h1>
+                <p class="text-info">Software Engineer</p>
+                <p class="text-info">Username: {{ user.username }}</p>
+                <p class="text-info">First Name: {{ user.first_name }}</p>
+                <p class="text-info">Last Name: {{ user.last_name }}</p>
+                <p class="text-info">Email: <a href="mailto:{{ user.email }}" class="text-info">{{ user.email }}</a></p>
+                
+                <!-- Bio Section -->
                 <h3 class="text-info">Bio</h3>
-                <p class="text-info">I am a software engineer, passionate about learning new technologies</p>
-                <div class="col-md-8">
-                  <a href="{% url 'update_profile' %}" class="btn btn-primary">Update Profile</a>
+                <p class="text-info">I am a software engineer, passionate about learning new technologies.</p>
+                
+                <!-- Update Profile Button -->
+                <a href="{% url 'update_profile' %}" class="btn btn-primary mt-3">Update Profile</a>
               </div>
-            
-            
+            </div>
+          </div>
         </div>
-
+      </div>
     </div>
+  </div>
 
-    <!-- Bootstrap JS and dependencies -->
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
-
+  <!-- Bootstrap JS and dependencies -->
+  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
 </body>
-
 
 {% endblock %}
