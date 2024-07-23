@@ -1,225 +1,240 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
+  <head>
+    {% load static %}
+    <!-- Basic Meta Tags -->
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, shrink-to-fit=no"
+    />
+    <meta name="keywords" content="" />
+    <meta name="description" content="" />
+    <meta name="author" content="" />
 
-<head>
-  {% load static %}
-  <link rel="stylesheet" href="{% static 'membersAuth/css/bootstrap.min.css' %}"> 
-  <!-- Basic -->
-  <meta charset="utf-8" />
-  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <!-- Mobile Metas -->
-  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-  <!-- Site Metas -->
-  <meta name="keywords" content="" />
-  <meta name="description" content="" />
-  <meta name="author" content="" />
-  <link rel="shortcut icon" href="{% static 'membersAuth/images/favicon.png'%}" type="">
-  <title>{% block title %}my hub{% endblock %}</title>
+    <!-- Favicon -->
+    <link
+      rel="shortcut icon"
+      href="{% static 'membersAuth/images/favicon.png' %}"
+      type="image/x-icon"
+    />
 
-  <!-- bootstrap core css -->
-  <link rel="stylesheet" type="text/css" href="{% static '/membersAuth/bootstrap.css'%}" />
+    <!-- Page Title -->
+    <title>{% block title %}my hub{% endblock %}</title>
 
-  <!-- fonts style -->
-  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700;900&display=swap" rel="stylesheet">
+    <!-- Stylesheets -->
+    <link
+      rel="stylesheet"
+      href="{% static 'membersAuth/css/bootstrap.min.css' %}"
+    />
+    <link rel="stylesheet" href="{% static 'membersAuth/bootstrap.css' %}" />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700;900&display=swap"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css"
+    />
+    <link
+      rel="stylesheet"
+      href="{% static 'membersAuth/css/font-awesome.min.css' %}"
+    />
+    <link rel="stylesheet" href="{% static 'membersAuth/css/style.css' %}" />
+    <link
+      rel="stylesheet"
+      href="{% static 'membersAuth/css/responsive.css' %}"
+    />
+  </head>
 
-  <!--owl slider stylesheet -->
-  <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css" />
-
-  <!-- font awesome style -->
-  <link href="{% static 'membersAuth/css/font-awesome.min.css'%}" rel="stylesheet" />
-
-  <!-- Custom styles for this template -->
-  <link href="{% static 'membersAuth/css/style.css'%}" rel="stylesheet" />
-  <!-- responsive style -->
-  <link href="{% static 'membersAuth/css/responsive.css'%}" rel="stylesheet" />
-
-</head>
-
-<body class="sub_page">
-
-  <div class="hero_area">
-
-    <div class="hero_bg_box">
-      <div class="bg_img_box">
-        <img src="{% static 'membersAuth/images/hero-bg.png'%}" alt="">
+  <body class="sub_page">
+    <!-- Hero Area -->
+    <div class="hero_area">
+      <div class="hero_bg_box">
+        <div class="bg_img_box">
+          <img
+            src="{% static 'membersAuth/images/hero-bg.png' %}"
+            alt="Hero Background"
+          />
+        </div>
       </div>
-    </div>
 
-    <!-- header section strats -->
-    <header class="header_section">
-      <div class="container-fluid">
-        <nav class="navbar navbar-expand-lg custom_nav-container ">
-          <a class="navbar-brand" href="{% url 'home'%}">
-            <span>
-              Students Hub
-            </span>
-          </a>
+      <!-- Header Section -->
+      <header class="header_section">
+        <div class="container-fluid">
+          <nav class="navbar navbar-expand-lg custom_nav-container">
+            <a class="navbar-brand" href="{% url 'home' %}">
+              <span>Students Hub</span>
+            </a>
 
-          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-            <span class=""> </span>
-          </button>
+            <button
+              class="navbar-toggler"
+              type="button"
+              data-toggle="collapse"
+              data-target="#navbarSupportedContent"
+              aria-controls="navbarSupportedContent"
+              aria-expanded="false"
+              aria-label="Toggle navigation"
+            >
+              <span class="navbar-toggler-icon"></span>
+            </button>
 
-          <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul class="navbar-nav  ">
-            
-              <li class="nav-item ">
-                <a class="nav-link" href="{% url 'home'%}">Home </a>
-              </li>
-              <li class="nav-item ">
-                <a class="nav-link" href="{% url 'library'%}"> Library </a>
-              </li>
-              <!-- <li class="nav-item">
-                <a class="nav-link" href="{% url 'assignments'%}">Assignments</a>
-              </li> -->
-              <li class="nav-item">
-                <a class="nav-link" href="{% url 'about'%}">about us</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="{% url 'profile'%}">profile</a>
-              </li>
-           
-              <li class="nav-item">
-                <a href="{% url 'profile'%}"><img src="{{ user.profile_picture.url }}" alt="no image" class="img-fluid rounded-circle profile-picture" style="max-width: 45px; height: auto;"><br></a>
-              <a href="{% url 'sign_out'%}"> Logout <br> {{user.username}}</a>
-            
-              </li>
-             
-            </ul>
-          </div>
-        </nav>
-      </div>
-    </header>
-    <!-- end header section -->
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+              <ul class="navbar-nav">
+                <li class="nav-item">
+                  <a class="nav-link" href="{% url 'home' %}">Home</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="{% url 'library' %}">Library</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="{% url 'about' %}">About Us</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="{% url 'profile' %}">Profile</a>
+                </li>
+                <li class="nav-item">
+                  <a href="{% url 'profile' %}">
+                    {% if user.profile_picture %}
+                    <img
+                      src="{{ user.profile_picture.url }}"
+                      alt="Profile Picture"
+                      class="img-fluid rounded-circle profile-picture"
+                      style="
+                        width: 45px;
+                        height: 45px;
+                        border-radius: 50%;
+                        display: inline-block;
+                        vertical-align: middle;
+                      "
+                    />
 
- <main>{% block content %}{% endblock %}</main>
+                    {% else %}
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="45"
+                      height="45"
+                      fill="currentColor"
+                      class="bi bi-person-circle"
+                      viewBox="0 0 16 16"
+                    >
+                      <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0" />
+                      <path
+                        fill-rule="evenodd"
+                        d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8m8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1"
+                      />
+                    </svg>
+                    {% endif %}
+                    <br />
+                  </a>
+                  <a href="{% url 'sign_out' %}"
+                    >Logout<br />{{ user.username }}</a
+                  >
+                </li>
+              </ul>
+            </div>
+          </nav>
+        </div>
+      </header>
+      <!-- End Header Section -->
 
-  <!-- info section -->
+      <!-- Main Content -->
+      <main>{% block content %}{% endblock %}</main>
 
-  <section class="info_section layout_padding2">
-    <div class="container">
-      <div class="row">
-        <div class="col-md-6 col-lg-3 info_col">
-          <div class="info_contact">
-            <h4>
-              Address
-            </h4>
-            <div class="contact_link_box">
-             
-              
-              <a href="">
-                
-                  <a href="www.gmail.com">Email Us</a>
-                </span>
-              </a>
-              <a href="">
-                
-                <span>
-                  Call +254 759742384
-                </span>
-              </a>
-              <a href="">
-                <span>
-                <a href="https://maps.app.goo.gl/W95wSpWkB7BYXVYt8"> Find Our Location</a>
-                </span>
-              </a>
+      <!-- Info Section -->
+      <section class="info_section layout_padding2">
+        <div class="container">
+          <div class="row">
+            <div class="col-md-6 col-lg-3 info_col">
+              <div class="info_contact">
+                <h4>Address</h4>
+                <div class="contact_link_box">
+                  <a href="mailto:example@example.com">Email Us</a>
+                  <a href="tel:+254759742384">Call +254 759742384</a>
+                  <a href="https://maps.app.goo.gl/W95wSpWkB7BYXVYt8"
+                    >Find Our Location</a
+                  >
+                </div>
+              </div>
+              <div class="info_social">
+                <a href="https://www.facebook.com"
+                  ><i class="fa fa-facebook" aria-hidden="true"></i
+                ></a>
+                <a href="https://twitter.com"
+                  ><i class="fa fa-twitter" aria-hidden="true"></i
+                ></a>
+                <a href="https://www.linkedin.com"
+                  ><i class="fa fa-linkedin" aria-hidden="true"></i
+                ></a>
+                <a href="https://www.instagram.com"
+                  ><i class="fa fa-instagram" aria-hidden="true"></i
+                ></a>
+              </div>
+            </div>
+            <div class="col-md-6 col-lg-3 info_col">
+              <div class="info_detail">
+                <h4>Contact Us</h4>
+                <ul>
+                  <li>
+                    <a href="https://www.facebook.com">Our Facebook Page</a>
+                  </li>
+                  <li><a href="https://twitter.com">Our Twitter Page</a></li>
+                  <li>
+                    <a href="https://www.instagram.com">Our Instagram Page</a>
+                  </li>
+                  <li>
+                    <a href="https://www.linkedin.com">Our LinkedIn Page</a>
+                  </li>
+                </ul>
+              </div>
+            </div>
+            <div class="col-md-6 col-lg-2 mx-auto info_col">
+              <div class="info_link_box">
+                <h4>Links</h4>
+                <div class="info_links">
+                  <a class="active" href="{% url 'library' %}"
+                    >Access Resources</a
+                  >
+                  <a href="{% url 'about' %}">About</a>
+                  <a href="{% url 'infopage' %}">Info Page</a>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-6 col-lg-3 info_col">
+              <h4>Subscribe</h4>
+              <form method="post" action="{% url 'managesubscribers' %}">
+                {% csrf_token %} {{ form.as_p }}
+                <button type="submit">Register</button>
+              </form>
             </div>
           </div>
-          <div class="info_social">
-            <a href="">
-              <i class="fa fa-facebook" aria-hidden="true"></i>
-            </a>
-            <a href="">
-              <i class="fa fa-twitter" aria-hidden="true"></i>
-            </a>
-            <a href="">
-              <i class="fa fa-linkedin" aria-hidden="true"></i>
-            </a>
-            <a href="">
-              <i class="fa fa-instagram" aria-hidden="true"></i>
-            </a>
-          </div>
         </div>
-        <div class="col-md-6 col-lg-3 info_col">
-          <div class="info_detail">
-            <h4>
-              Contact Us
-            </h4>
-            <ul>
-              <li> <a href="www.facebook.com">Our facebook Page</a></li>
-              <li><a href="www.twitter.com">Our Twitter Page</a></li>
-              <li><a href="www.instagram.com">Our Instagram Page</a></li>
-              <li><a href="www.linkedin.com">Our Linkedin Page</a></li>
-            
-            
-            
-            
-            </ul>
-           
+      </section>
+      <!-- End Info Section -->
 
-          </div>
+      <!-- Footer Section -->
+      <section class="footer_section">
+        <div class="container">
+          <p>
+            &copy; <span id="displayYear"></span> All Rights Reserved By
+            <a href="https://html.design/">StudentsHubTechnology</a>
+          </p>
         </div>
-        <div class="col-md-6 col-lg-2 mx-auto info_col">
-          <div class="info_link_box">
-            <h4>
-              Links
-            </h4>
-            <div class="info_links">
-              <a class="active" href="{% url 'library'%}">
-                Access Resources
-              </a>
-              <a class="" href="{% url 'about'%}">
-                About
-              </a>
-              <a class="" href="{% url 'infopage'%}">
-                Info page
-              </a>
-            </div>
-          </div>
-        </div>
-        <div class="col-md-6 col-lg-3 info_col ">
-          <h4>
-            Subscribe
-          </h4>
-          <form method="post" action="{% url 'managesubscribers' %}">
-            {% csrf_token %}
-            {{ form.as_p }}
-            <button type="submit">Register</button>
-        </form>
-        </div>
-      </div>
+      </section>
+      <!-- End Footer Section -->
     </div>
-  </section>
 
-  <!-- end info section -->
- 
-  <!-- footer section -->
-  <section class="footer_section">
-    <div class="container">
-      <p>
-        &copy; <span id="displayYear"></span> All Rights Reserved By
-        <a href="https://html.design/">StudentsHubTechnology</a>
-      </p>
-    </div>
-  </section>
-  <!-- footer section -->
-
-  <!-- jQery -->
-  <script type="text/javascript" src="js/jquery-3.4.1.min.js"></script>
-  <!-- popper js -->
-  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous">
-  </script>
-  <!-- bootstrap js -->
-  <script type="text/javascript" src="js/bootstrap.js"></script>
-  <!-- owl slider -->
-  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js">
-  </script>
-  <!-- custom js -->
-  <script type="text/javascript" src="js/custom.js"></script>
-  <!-- Google Map -->
-  <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCh39n5U-4IoWpsVGUHWdqB6puEkhRLdmI&callback=myMap">
-  </script>
-  <!-- End Google Map -->
-
-</body>
-
+    <!-- JavaScript Libraries -->
+    <script src="{% static 'membersAuth/js/jquery-3.4.1.min.js' %}"></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+      integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+      crossorigin="anonymous"
+    ></script>
+    <script src="{% static 'membersAuth/js/bootstrap.js' %}"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js"></script>
+    <script src="{% static 'membersAuth/js/custom.js' %}"></script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCh39n5U-4IoWpsVGUHWdqB6puEkhRLdmI&callback=myMap"></script>
+  </body>
 </html>
